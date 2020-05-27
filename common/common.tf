@@ -48,3 +48,13 @@ variable "key" {
   description = "Key that tfstate is stored in"
   type        = string
 }
+
+variable "namespace" {
+  description = "Namespace to associate resources in this account with"
+  type        = string
+}
+
+variable "owner" {
+  description = "Team/person responsible for this account"
+  type        = string
+}
