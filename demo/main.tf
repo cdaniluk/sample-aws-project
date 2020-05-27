@@ -1,5 +1,5 @@
 resource "aws_iam_group" "billing_group" {
-    name = "BillingUsers"
+  name = "BillingUsers"
 
 }
 
@@ -9,11 +9,11 @@ resource "aws_iam_group_policy_attachment" "test-attach" {
 }
 
 resource "aws_iam_user" "simple_user" {
-    name = "TheAccountant"
+  name = "TheAccountant"
 }
 
 resource "aws_iam_group_membership" "team" {
-  name = aws_iam_group.billing_group.name
+  name  = aws_iam_group.billing_group.name
   group = aws_iam_group.billing_group.name
   users = [aws_iam_user.simple_user.name]
 }
@@ -64,3 +64,32 @@ resource "aws_lambda_function" "log_sad_things" {
   source_code_hash = data.archive_file.lambda.output_base64sha256
 }
 
+resource "aws_cloudwatch_event_rule" "every-minute" {
+  name                = "logSomethingSadEveryMinute"
+  schedule_expression = "rate(1 minute)"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_cloudwatch_event_target" "every-minute" {
+  rule = aws_cloudwatch_event_rule.every-minute.name
+  arn  = aws_lambda_function.log_sad_things.arn
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lambda_permission" "log_sad_things" {
+  statement_id_prefix = "AllowExecutionFromCloudWatch-"
+  action              = "lambda:InvokeFunction"
+  function_name       = aws_lambda_function.log_sad_things.function_name
+  principal           = "events.amazonaws.com"
+  source_arn          = aws_cloudwatch_event_rule.every-minute.arn
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
