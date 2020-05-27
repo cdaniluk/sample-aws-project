@@ -21,20 +21,20 @@ variable "tags" {
 
 variable "alert_webhook" {
   description = "Webhook to send alerts to"
-  type = string
+  type        = string
 }
 
 variable "notify_webhook" {
   description = "Webhook to send notifications to"
-  type = string
+  type        = string
 }
 
 variable "slack_channel" {
   description = "Channel to send notifications to"
-  type = string
+  type        = string
 }
 
 variable "ticket_webhook" {
   description = "Webhook to send tickets to"
-  type = string
+  type        = string
 }

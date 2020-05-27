@@ -1,29 +1,33 @@
 # Account Settings
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Providers
-
-| Name | Version |
-|------|---------|
-| errorcheck | n/a |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
-| bucket | Bucket that tfstate is stored in | `string` | n/a | yes |
-| dynamodb\_table | DynamoDB table for locking/state management | `string` | n/a | yes |
-| env | Environment being deployed to | `string` | n/a | yes |
-| iam\_master\_account | n/a | `string` | n/a | yes |
-| iam\_role\_prefix | n/a | `string` | n/a | yes |
-| key | Key that tfstate is stored in | `string` | n/a | yes |
-| namespace | Project name | `string` | n/a | yes |
-| owner | Owner of this infrastructure | `string` | n/a | yes |
-| region | Region resources are being deployed to | `string` | n/a | yes |
-| tags | n/a | `map(string)` | `{}` | no |
+|------|-------------|:----:|:-----:|:-----:|
+| alert\_webhook | Webhook to send alerts to | string | n/a | yes |
+| bucket | Bucket that tfstate is stored in | string | n/a | yes |
+| dynamodb\_table | DynamoDB table for locking/state management | string | n/a | yes |
+| env | Environment being deployed to | string | n/a | yes |
+| iam\_master\_account |  | string | n/a | yes |
+| iam\_role\_prefix |  | string | n/a | yes |
+| key | Key that tfstate is stored in | string | n/a | yes |
+| namespace | Namespace to associate resources in this account with | string | n/a | yes |
+| notify\_webhook | Webhook to send notifications to | string | n/a | yes |
+| owner | Team/person responsible for this account | string | n/a | yes |
+| region | Region resources are being deployed to | string | n/a | yes |
+| slack\_channel | Channel to send notifications to | string | n/a | yes |
+| tags |  | map(string) | `{}` | no |
+| ticket\_webhook | Webhook to send tickets to | string | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| cloudtrail\_log\_group | CloudTrail CloudWatch log group |
+| s3\_bucket\_access\_logging | S3 bucket to receive S3 bucket access logs |
+| sns\_topic\_alert\_arn | Alert Topic ARN |
+| sns\_topic\_notify\_arn | Notification Topic ARN |
+| sns\_topic\_ticket\_arn | Ticketing Topic ARN |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
