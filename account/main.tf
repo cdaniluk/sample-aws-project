@@ -1,5 +1,6 @@
 module "tags" {
-  source = "git::https://github.com/rhythmictech/terraform-terraform-tags.git?ref=v1.0.0"
+  source  = "rhythmictech/tags/terraform"
+  version = "~> 1.1"
 
   names = [
     "account",
@@ -19,27 +20,40 @@ locals {
 }
 
 module "s3logging-bucket" {
-  source        = "git::https://github.com/rhythmictech/terraform-aws-s3logging-bucket?ref=v1.0.1"
+  source  = "rhythmictech/s3logging-bucket/aws"
+  version = "~> 2.0.0"
+
   bucket_suffix = "account"
-  region        = var.region
   tags          = local.tags
 }
 
 module "cloudtrail-bucket" {
-  source         = "git::https://github.com/rhythmictech/terraform-aws-cloudtrail-bucket?ref=v1.2.0"
-  logging_bucket = module.s3logging-bucket.s3logging_bucket_name
+  source  = "rhythmictech/cloudtrail-bucket/aws"
+  version = "~> 1.3.1"
+
+  logging_bucket = module.s3logging-bucket.s3_bucket_name
   region         = var.region
   tags           = local.tags
-
 }
 
 module "cloudtrail-logging" {
-  source            = "git::https://github.com/rhythmictech/terraform-aws-cloudtrail-logging?ref=v1.1.0"
+  source  = "rhythmictech/cloudtrail-logging/aws"
+  version = "~> 1.3.0"
+
   cloudtrail_bucket = module.cloudtrail-bucket.s3_bucket_name
   kms_key_id        = module.cloudtrail-bucket.kms_key_id
   region            = var.region
 }
 
 module "iam-password-policy" {
-  source = "git::https://github.com/rhythmictech/terraform-aws-iam-password-policy?ref=v1.0.0"
+  source  = "rhythmictech/iam-password-policy/aws"
+  version = "~> 1.0.0"
+}
+
+module "keypair" {
+  source  = "rhythmictech/secretsmanager-keypair/aws"
+  version = "~> 0.0.3"
+
+  name_prefix = "instance-keypair"
+  description = "SSH keypair for instances"
 }

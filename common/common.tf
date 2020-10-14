@@ -5,20 +5,36 @@ provider "aws" {
   region = var.region
 }
 
-terraform {
-  backend "s3" {}
 
-  required_version = ">= 0.12.0"
+terraform {
+  required_version = "~> 0.13.4"
+
+  backend "s3" {
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.8"
+    }
+
+    local = {
+      source = "hashicorp/local"
+    }
+    archive = {
+      source = "hashicorp/archive"
+    }
+  }
 }
 
 # Intentionally throws an error if the workspace doesn't match the env
-# from https://github.com/rhythmictech/terraform-provider-errorcheck
-resource "errorcheck_is_valid" "workspace_should_match_env" {
-  name = "terraform workspace should match env variable"
-  test = {
-    assert        = terraform.workspace == var.env
-    error_message = "Change workspace to match env. Workspace: ${terraform.workspace}, env: ${var.env}"
-  }
+# from https://github.com/rhythmictech/terraform-terraform-errorcheck
+module "does_workspace_match_env" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.0.0"
+
+  assert        = terraform.workspace == var.env
+  error_message = "Change workspace to match env. Workspace: '${terraform.workspace}', env: '${var.env}'"
 }
 
 # =============================================

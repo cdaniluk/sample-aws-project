@@ -27,5 +27,5 @@ output "cloudtrail_log_group" {
 
 output "s3_bucket_access_logging" {
   description = "S3 bucket to receive S3 bucket access logs"
-  value       = module.s3logging-bucket.s3logging_bucket_name
+  value       = module.s3logging-bucket.s3_bucket_name
 }

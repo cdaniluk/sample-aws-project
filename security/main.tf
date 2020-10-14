@@ -8,15 +8,23 @@ data "terraform_remote_state" "account" {
 }
 
 module "cis-cloudwatch-monitors" {
-  source           = "git::https://github.com/rhythmictech/terraform-aws-cis-cloudwatch-monitors?ref=v1.1.0"
+  source = "rhythmictech/cis-cloudwatch-monitors/aws"
 
-  default_period = 60
+  default_period   = 60
   notification_arn = data.terraform_remote_state.account.outputs.sns_topic_notify_arn
   log_group        = data.terraform_remote_state.account.outputs.cloudtrail_log_group
 }
 
+module "guardduty" {
+  source = "rhythmictech/guardduty-to-sns/aws"
+
+  finding_publishing_frequency = "FIFTEEN_MINUTES"
+  notification_arn             = data.terraform_remote_state.account.outputs.sns_topic_alert_arn
+}
+
 resource "aws_cloudwatch_log_metric_filter" "find_sad_things" {
-  name           = "find_sad_things"
+  name = "find_sad_things"
+
   log_group_name = "/aws/lambda/logSadThings"
   pattern        = "INVALID AUTHENTICATION ATTEMPT"
 
@@ -29,8 +37,9 @@ resource "aws_cloudwatch_log_metric_filter" "find_sad_things" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "find_sad_things" {
+  alarm_name = "find_sad_things"
+
   alarm_actions       = [data.terraform_remote_state.account.outputs.sns_topic_notify_arn]
-  alarm_name          = "find_sad_things"
   alarm_description   = "Unsuccessful logins detected"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1

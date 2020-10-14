@@ -13,8 +13,6 @@ thingsToSay = [
 ]
 
 def handler(event, context):
-    
+
     print("Received request.")
     print(random.choice(thingsToSay))
-    
-    
