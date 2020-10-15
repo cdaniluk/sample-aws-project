@@ -1,11 +1,11 @@
 # securityautomation-demo-project
 
-[![tflint](https://github.com/rhythmictech/securityautomation-demo-project/workflows/tflint/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/securityautomation-demo-project/actions?query=workflow%3Atflint+event%3Apush+branch%3Amaster)
-[![tfsec](https://github.com/rhythmictech/securityautomation-demo-project/workflows/tfsec/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/securityautomation-demo-project/actions?query=workflow%3Atfsec+event%3Apush+branch%3Amaster)
-[![yamllint](https://github.com/rhythmictech/securityautomation-demo-project/workflows/yamllint/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/securityautomation-demo-project/actions?query=workflow%3Ayamllint+event%3Apush+branch%3Amaster)
-[![misspell](https://github.com/rhythmictech/securityautomation-demo-project/workflows/misspell/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/securityautomation-demo-project/actions?query=workflow%3Amisspell+event%3Apush+branch%3Amaster)
-[![pre-commit-check](https://github.com/rhythmictech/securityautomation-demo-project/workflows/pre-commit-check/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/securityautomation-demo-project/actions?query=workflow%3Apre-commit-check+event%3Apush+branch%3Amaster)
-<a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=twitter" alt="follow on Twitter"></a>
+[![tflint](https://github.com/cdaniluk/securityautomation-demo-project/workflows/tflint/badge.svg?branch=master&event=push)](https://github.com/cdaniluk/securityautomation-demo-project/actions?query=workflow%3Atflint+event%3Apush+branch%3Amaster)
+[![tfsec](https://github.com/cdaniluk/securityautomation-demo-project/workflows/tfsec/badge.svg?branch=master&event=push)](https://github.com/cdaniluk/securityautomation-demo-project/actions?query=workflow%3Atfsec+event%3Apush+branch%3Amaster)
+[![yamllint](https://github.com/cdaniluk/securityautomation-demo-project/workflows/yamllint/badge.svg?branch=master&event=push)](https://github.com/cdaniluk/securityautomation-demo-project/actions?query=workflow%3Ayamllint+event%3Apush+branch%3Amaster)
+[![misspell](https://github.com/cdaniluk/securityautomation-demo-project/workflows/misspell/badge.svg?branch=master&event=push)](https://github.com/cdaniluk/securityautomation-demo-project/actions?query=workflow%3Amisspell+event%3Apush+branch%3Amaster)
+[![pre-commit-check](https://github.com/cdaniluk/securityautomation-demo-project/workflows/pre-commit-check/badge.svg?branch=master&event=push)](https://github.com/cdaniluk/securityautomation-demo-project/actions?query=workflow%3Apre-commit-check+event%3Apush+branch%3Amaster)
+
 
 A terraform repository based on the [securityautomation-demo-project](https://github.com/cdaniluk/securityautomation-demo-project) example repository maintained by [Rhythmic](https://www.rhythmictech.com/). This project maps to the included PowerPoint presentation demonstrating how to use Terraform to drive and manage AWS native security functions.
 
